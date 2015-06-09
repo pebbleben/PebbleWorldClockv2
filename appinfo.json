@@ -1,0 +1,39 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "Ben Ben",
+    "longName": "Day and Night Earth Watchface",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/NIGHT_PBL.png",
+                "name": "NIGHT_PBL",
+                "type": "png"
+            },
+            {
+                "file": "images/DAY_PBL.png",
+                "name": "DAY_PBL",
+                "type": "png"
+            },
+            {
+                "file": "images/world.png",
+                "name": "WORLD",
+                "type": "png"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "Day Night",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
+    "uuid": "b0f886d8-0089-4a48-b79d-5bdc67803b91",
+    "versionLabel": "2",
+    "watchapp": {
+        "watchface": true
+    }
+}
