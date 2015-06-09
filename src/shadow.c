@@ -87,11 +87,11 @@ static void draw_watch(struct Layer *layer, GContext *ctx) {
   //  graphics_draw_pixel(ctx, p0);
   //COPY FORMUAL FROM ABOVE
     // ##### calculate the time
-#ifdef UTC_OFFSET
-  int now2 = (int)time(NULL) + -3600 * UTC_OFFSET;
-#else
+//#ifdef UTC_OFFSET
+//  int now2 = (int)time(NULL) + -3600 * -4;//UTC_OFFSET;
+//#else
   int now2 = (int)time(NULL) + time_offset;
-#endif
+//#endif
   float day_of_year; // value from 0 to 1 of progress through a year
   float time_of_day; // value from 0 to 1 of progress through a day
   // approx number of leap years since epoch
@@ -115,7 +115,11 @@ static void draw_watch(struct Layer *layer, GContext *ctx) {
   //put frame buffer here
   GBitmap *fb = graphics_capture_frame_buffer_format(ctx, GBitmapFormat8Bit);
   uint8_t *fb_data = gbitmap_get_data(fb);
-  uint8_t *background_data = gbitmap_get_data(gbitmap_create_with_resource(RESOURCE_ID_NIGHT_PBL));
+  static GBitmap *bb;
+  bb = gbitmap_create_with_resource(RESOURCE_ID_NIGHT_PBL);
+  uint8_t *background_data = gbitmap_get_data(bb);
+  int bpr;
+  bpr = gbitmap_get_bytes_per_row(bb);
   #define WINDOW_WIDTH 144 
   uint8_t (*fb_matrix)[WINDOW_WIDTH] = (uint8_t (*)[WINDOW_WIDTH]) fb_data;
   uint8_t (*background_matrix)[WINDOW_WIDTH] = (uint8_t (*)[WINDOW_WIDTH]) background_data;
@@ -134,7 +138,14 @@ static void draw_watch(struct Layer *layer, GContext *ctx) {
       } else {
         // black pixel
         //fb_matrix[y][x] = 0;
-        fb_matrix[y][x] = background_matrix[y][x];
+        //if (fb_matrix[y][x] == 0) {
+        //  fb_matrix[y][x] = 255;
+        //}
+        //if (fb_matrix[y][x] == GColorIslamicGreen) {
+        //  fb_matrix[y][x] = GColorDarkGreen ;
+        //}
+        //fb_matrix[y][x] = background_matrix[y][x];
+        fb_matrix[y][x] = background_data[y*bpr+x];
           //GPoint p0 = GPoint(x, y);  
           //graphics_context_set_stroke_color(ctx, GColorWhite  );  
           //graphics_context_set_stroke_color(ctx, GColorBlack );  
@@ -379,7 +390,7 @@ static void init(void) {
   #ifdef PBL_PLATFORM_APLITE 
   world_bitmap = gbitmap_create_with_resource(RESOURCE_ID_WORLD);
   #else 
-  world_bitmap = gbitmap_create_with_resource(RESOURCE_ID_DAY_PBL);  
+  world_bitmap = gbitmap_create_with_resource(RESOURCE_ID_DAY_PBL);  //SIMPLE_DAY);//
   world_NIGHT_bitmap = gbitmap_create_with_resource(RESOURCE_ID_NIGHT_PBL);
   #endif
 

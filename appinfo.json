@@ -9,6 +9,11 @@
     "resources": {
         "media": [
             {
+                "file": "images/worldCLR.png",
+                "name": "SIMPLE_DAY",
+                "type": "png"
+            },
+            {
                 "file": "images/NIGHT_PBL.png",
                 "name": "NIGHT_PBL",
                 "type": "png"
