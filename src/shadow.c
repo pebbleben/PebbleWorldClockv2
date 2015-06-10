@@ -189,6 +189,7 @@ static void draw_watch(struct Layer *layer, GContext *ctx) {
   //  }  
   //}
   graphics_release_frame_buffer(ctx,fb);
+  gbitmap_destroy(bb);
     
   //
   #endif
