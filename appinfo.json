@@ -9,6 +9,11 @@
     "resources": {
         "media": [
             {
+                "file": "images/converted.png",
+                "name": "CLR64",
+                "type": "png"
+            },
+            {
                 "file": "images/worldCLR.png",
                 "name": "SIMPLE_DAY",
                 "type": "png"

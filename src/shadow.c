@@ -112,18 +112,42 @@ static void draw_watch(struct Layer *layer, GContext *ctx) {
   // ##### draw the bitmap
   int x, y;
   GSize image_size = gbitmap_get_bounds(imageB).size;
-  //put frame buffer here
-  GBitmap *fb = graphics_capture_frame_buffer_format(ctx, GBitmapFormat8Bit);
-  uint8_t *fb_data = gbitmap_get_data(fb);
+
   static GBitmap *bb;
-  bb = gbitmap_create_with_resource(RESOURCE_ID_NIGHT_PBL);
-  uint8_t *background_data = gbitmap_get_data(bb);
+  //GColor *gbitmap_get_palette(bb);  
+  bb = gbitmap_create_with_resource(RESOURCE_ID_CLR64);//NIGHT_PBL);
+  
+  //static GBitmap *bbb;
+  //bbb =  gbitmap_create_from_png_data(gbitmap_get_data(bb),GBitmapFormat8Bit);
+  
+  //put frame buffer here
+  //GBitmap *fb = graphics_capture_frame_buffer_format(ctx, gbitmap_get_format(bb));//GBitmapFormat8Bit
+  GBitmap *fb = graphics_capture_frame_buffer_format(ctx, GBitmapFormat8Bit);//
+  uint8_t *fb_data = gbitmap_get_data(fb);  
+  
+  //#define PALETTE_SIZE GBitmapFormat8Bit //16
+  //GColor *orig_palette = gbitmap_get_palette(bb);
+  //GColor *new_palette = (GColor *)malloc(PALETTE_SIZE * sizeof(GColor));
+  //for (int i = 0; i < PALETTE_SIZE; ++i) {
+  //  new_palette[i].argb = orig_palette[i].argb ^ 0x3f;
+  //}
+  //gbitmap_set_palette(bb, new_palette, true);
+    
+  uint8_t *background_data = gbitmap_get_data(bb); 
   int bpr;
   bpr = gbitmap_get_bytes_per_row(bb);
   #define WINDOW_WIDTH 144 
   uint8_t (*fb_matrix)[WINDOW_WIDTH] = (uint8_t (*)[WINDOW_WIDTH]) fb_data;
   uint8_t (*background_matrix)[WINDOW_WIDTH] = (uint8_t (*)[WINDOW_WIDTH]) background_data;
   //put frame buffer here
+  
+  //GColor invisible = (Gcolor){
+  //  .a = 0b01,
+  //  .r = 0b11,
+  //  .g = 0b10,
+  //  .b = 0b00
+  //};
+  
   
   for(x = 0; x < image_size.w; x++) {
     int x_angle = (int)((float)TRIG_MAX_ANGLE * (float)x / (float)(image_size.w));
@@ -144,7 +168,7 @@ static void draw_watch(struct Layer *layer, GContext *ctx) {
         //if (fb_matrix[y][x] == GColorIslamicGreen) {
         //  fb_matrix[y][x] = GColorDarkGreen ;
         //}
-        //fb_matrix[y][x] = background_matrix[y][x];
+        //fb_matrix[y][x] = invisible;//background_matrix[y][x];
         fb_matrix[y][x] = background_data[y*bpr+x];
           //GPoint p0 = GPoint(x, y);  
           //graphics_context_set_stroke_color(ctx, GColorWhite  );  
@@ -163,7 +187,7 @@ static void draw_watch(struct Layer *layer, GContext *ctx) {
   //    fb_data[i] = background_data[i];
   //  }  
   //}
-  graphics_release_frame_buffer(ctx,fb);
+  //graphics_release_frame_buffer(ctx,fb);
     
   //
   #endif
