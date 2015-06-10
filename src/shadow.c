@@ -111,11 +111,11 @@ static void draw_watch(struct Layer *layer, GContext *ctx) {
   int sun_y = -sin_lookup((day_of_year - 0.2164) * TRIG_MAX_ANGLE) * .26 * .25;
   // ##### draw the bitmap
   int x, y;
-  GSize image_size = gbitmap_get_bounds(imageB).size;
+  //GSize image_size = gbitmap_get_bounds(imageB).size;
 
   static GBitmap *bb;
   //GColor *gbitmap_get_palette(bb);  
-  bb = gbitmap_create_with_resource(RESOURCE_ID_CLR64);//NIGHT_PBL);
+  bb = gbitmap_create_with_resource(RESOURCE_ID_NIGHT_PBLv2);//CLR64);//NIGHT_PBL);
   
   //static GBitmap *bbb;
   //bbb =  gbitmap_create_from_png_data(gbitmap_get_data(bb),GBitmapFormat8Bit);
@@ -134,8 +134,8 @@ static void draw_watch(struct Layer *layer, GContext *ctx) {
   //gbitmap_set_palette(bb, new_palette, true);
     
   uint8_t *background_data = gbitmap_get_data(bb); 
-  int bpr;
-  bpr = gbitmap_get_bytes_per_row(bb);
+  //int bpr;
+  //bpr = gbitmap_get_bytes_per_row(bb);
   #define WINDOW_WIDTH 144 
   uint8_t (*fb_matrix)[WINDOW_WIDTH] = (uint8_t (*)[WINDOW_WIDTH]) fb_data;
   uint8_t (*background_matrix)[WINDOW_WIDTH] = (uint8_t (*)[WINDOW_WIDTH]) background_data;
@@ -149,10 +149,10 @@ static void draw_watch(struct Layer *layer, GContext *ctx) {
   //};
   
   
-  for(x = 0; x < image_size.w; x++) {
-    int x_angle = (int)((float)TRIG_MAX_ANGLE * (float)x / (float)(image_size.w));
-    for(y = 0; y < image_size.h; y++) {
-      int y_angle = (int)((float)TRIG_MAX_ANGLE * (float)y / (float)(image_size.h * 2)) - TRIG_MAX_ANGLE/4;
+  for(x = 0; x < 144; x++) {
+    int x_angle = (int)((float)TRIG_MAX_ANGLE * (float)x / (float)(144));
+    for(y = 0; y < 72; y++) {
+      int y_angle = (int)((float)TRIG_MAX_ANGLE * (float)y / (float)(72 * 2)) - TRIG_MAX_ANGLE/4;
       // spherical law of cosines
       float angle = ((float)sin_lookup(sun_y)/(float)TRIG_MAX_RATIO) * ((float)sin_lookup(y_angle)/(float)TRIG_MAX_RATIO);
       angle = angle + ((float)cos_lookup(sun_y)/(float)TRIG_MAX_RATIO) * ((float)cos_lookup(y_angle)/(float)TRIG_MAX_RATIO) * ((float)cos_lookup(sun_x - x_angle)/(float)TRIG_MAX_RATIO);
@@ -169,7 +169,8 @@ static void draw_watch(struct Layer *layer, GContext *ctx) {
         //  fb_matrix[y][x] = GColorDarkGreen ;
         //}
         //fb_matrix[y][x] = invisible;//background_matrix[y][x];
-        fb_matrix[y][x] = background_data[y*bpr+x];
+        //fb_matrix[y][x] = background_data[y*bpr+x];
+        fb_matrix[y][x] = background_matrix[y][x];
           //GPoint p0 = GPoint(x, y);  
           //graphics_context_set_stroke_color(ctx, GColorWhite  );  
           //graphics_context_set_stroke_color(ctx, GColorBlack );  
@@ -187,7 +188,7 @@ static void draw_watch(struct Layer *layer, GContext *ctx) {
   //    fb_data[i] = background_data[i];
   //  }  
   //}
-  //graphics_release_frame_buffer(ctx,fb);
+  graphics_release_frame_buffer(ctx,fb);
     
   //
   #endif

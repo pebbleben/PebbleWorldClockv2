@@ -9,6 +9,11 @@
     "resources": {
         "media": [
             {
+                "file": "images/NIGHT_PBLv2.png",
+                "name": "NIGHT_PBLv2",
+                "type": "png"
+            },
+            {
                 "file": "images/converted.png",
                 "name": "CLR64",
                 "type": "png"
