@@ -9,23 +9,28 @@
     "resources": {
         "media": [
             {
-                "file": "images/NIGHT_PBLv2.png",
-                "name": "NIGHT_PBLv2",
+                "file": "images/preview_earth_daymap (6) (2).png",
+                "name": "DAY_PBL_V10",
                 "type": "png"
             },
             {
-                "file": "images/converted.png",
-                "name": "CLR64",
+                "file": "images/preview_earth_daymap (3).png",
+                "name": "DAY_PBL_V6",
                 "type": "png"
             },
             {
-                "file": "images/worldCLR.png",
-                "name": "SIMPLE_DAY",
+                "file": "images/earthlights_dmsp.png",
+                "name": "NIGHT_PBLv5",
                 "type": "png"
             },
             {
-                "file": "images/NIGHT_PBL.png",
-                "name": "NIGHT_PBL",
+                "file": "images/preview_earth_daymap.png",
+                "name": "DAY_PBL_V5",
+                "type": "png"
+            },
+            {
+                "file": "images/world.png",
+                "name": "WORLD",
                 "type": "png"
             },
             {
@@ -34,8 +39,23 @@
                 "type": "png"
             },
             {
-                "file": "images/world.png",
-                "name": "WORLD",
+                "file": "images/NIGHT_PBL.png",
+                "name": "NIGHT_PBL",
+                "type": "png"
+            },
+            {
+                "file": "images/worldCLR.png",
+                "name": "SIMPLE_DAY",
+                "type": "png"
+            },
+            {
+                "file": "images/converted.png",
+                "name": "CLR64",
+                "type": "png"
+            },
+            {
+                "file": "images/NIGHT_PBLv2.png",
+                "name": "NIGHT_PBLv2",
                 "type": "png"
             }
         ]
